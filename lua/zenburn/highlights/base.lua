@@ -197,5 +197,10 @@ return function(c, opts)
     helpHyperTextJump = { fg = ui.fg_link, underline = true },
     helpSectionDelim = { fg = ui.fg_faint },
     Terminal        = { fg = ui.fg, bg = ui.bg_dark },
+
+    -- indent guides: other plugins link here (blink.indent in the owner config)
+    IblIndent       = { fg = ui.fg_indent },
+    IblWhitespace   = { fg = ui.fg_whitespace },
+    IblScope        = { fg = ui.fg_indent_scope },
   }
 end

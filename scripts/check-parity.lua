@@ -67,6 +67,7 @@ local expected = {
   ["@constant"]           = { fg = "#d0bf8f", bold = true },
   BlinkIndentScope        = { fg = "#656555" },
   BlinkIndent             = { fg = "#4f4f4f" },
+  IblScope                = { fg = "#656555" },
   ["@attribute"]          = { fg = "#6ca0a3" },
   ["@lsp.type.decorator"] = { fg = "#6ca0a3" },
   ["@tag"]                = { fg = "#b6b6a7" },
