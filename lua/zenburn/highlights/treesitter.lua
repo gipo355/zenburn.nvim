@@ -29,7 +29,7 @@ return function(c, opts)
     ["@string.special.path"]        = "String",
     ["@string.special.url"]         = { fg = ui.fg_link, underline = true },
     ["@character"]                  = "Character",
-    ["@character.special"]          = "SpecialChar",
+    ["@character.special"]          = { fg = syn.fg, bold = true },   -- DEFAULT_ENTITY
     ["@character.printf"]           = "SpecialChar",
     ["@boolean"]                    = "Keyword",
     ["@number"]                     = "Number",

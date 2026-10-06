@@ -48,7 +48,7 @@ return function(c, opts)
     MatchParen      = { bg = ui.bg_match, bold = true },
     QuickFixLine    = { bg = ui.bg_visual },
     Title           = { fg = ui.fg_title, bold = true },
-    Underlined      = { underline = true },
+    Underlined      = { fg = ui.fg_link, underline = true },
     Bold            = { bold = true },
     Italic          = {}, -- never italic
     BoldItalic      = { bold = true },

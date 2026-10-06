@@ -6,6 +6,7 @@ local M = {}
 -- applied (base, treesitter, semantic, kinds).
 -- stylua: ignore
 M.plugins = {
+  ["avante.nvim"]            = "avante",
   ["blink.cmp"]              = "blink-cmp",
   ["blink.indent"]           = "blink-indent",
   ["blink.pairs"]            = "blink-pairs",
@@ -34,12 +35,14 @@ M.plugins = {
   ["nvim-dap"]               = "dap",
   ["nvim-dap-ui"]            = "dap-ui",
   ["nvim-dap-virtual-text"]  = "dap-virtual-text",
+  ["nvim-spectre"]           = "spectre",
   ["nvim-tree.lua"]          = "nvim-tree",
   ["nvim-treesitter-context"]= "treesitter-context",
   ["oil.nvim"]               = "oil",
   ["outline.nvim"]           = "outline",
   ["rainbow-delimiters.nvim"]= "rainbow-delimiters",
   ["render-markdown.nvim"]   = "render-markdown",
+  ["satellite.nvim"]         = "satellite",
   ["sidekick.nvim"]          = "sidekick",
   ["snacks.nvim"]            = "snacks",
   ["telescope.nvim"]         = "telescope",
@@ -47,6 +50,7 @@ M.plugins = {
   ["trouble.nvim"]           = "trouble",
   ["vim-dadbod-ui"]          = "dadbod-ui",
   ["vim-matchup"]            = "matchup",
+  ["vim-visual-multi"]       = "visual-multi",
   ["which-key.nvim"]         = "which-key",
   ["yanky.nvim"]             = "yanky",
 }
@@ -68,9 +72,12 @@ function M.enabled(opts)
     files[f] = true
   end
 
+  -- all: every file. auto with lazy: installed plugins. No lazy: every file,
+  -- since lazy-loaded plugins are not in package.loaded yet. auto off: none.
   local installed = opts.plugins.auto and U.lazy_plugins() or nil
+  local everything = opts.plugins.all or (opts.plugins.auto and installed == nil)
   for plugin, file in pairs(M.plugins) do
-    if opts.plugins.all or installed == nil or installed[plugin] then
+    if everything or (installed and installed[plugin]) then
       files[file] = true
     end
   end
@@ -106,7 +113,7 @@ function M.setup(colors, opts)
     opts.overrides(groups, colors)
   else
     for group, hl in pairs(opts.overrides) do
-      groups[group] = hl
+      groups[group] = type(hl) == "table" and vim.deepcopy(hl) or hl
     end
   end
 

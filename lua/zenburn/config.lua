@@ -21,7 +21,7 @@ M.options = nil
 
 ---@param opts? table
 function M.setup(opts)
-  M.options = vim.tbl_deep_extend("force", {}, M.defaults, opts or {})
+  M.options = opts or {}
 end
 
 --- defaults < vim.g.zenburn < setup(opts)

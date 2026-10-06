@@ -40,6 +40,8 @@ local expected = {
   DiagnosticUnderlineError = { undercurl = true, sp = "#e81a1a" },
   DiagnosticUnderlineWarn = { undercurl = true, sp = "#f0dfaf" },
   DiagnosticUnderlineInfo = { undercurl = true, sp = "#d0bf8f" },
+  DiagnosticUnderlineHint = { undercurl = true, sp = "#d0bf8f" },
+  Underlined              = { fg = "#94bff3", underline = true },
   SpellBad                = { undercurl = true, sp = "#dcdccc" },
   -- syntax
   Keyword                 = { fg = "#f0dfaf", bold = true },
@@ -69,7 +71,7 @@ local expected = {
   ["@lsp.type.property"]  = { fg = false, bold = false },
   ["@constant"]           = { fg = "#d0bf8f", bold = true },
   BlinkIndentScope        = { fg = "#656555" },
-  BlinkIndent             = { fg = "#4f4f4f" },
+  BlinkIndent             = { fg = "#383838" },
   IblScope                = { fg = "#656555" },
   ["@attribute"]          = { fg = "#6ca0a3" },
   ["@lsp.type.decorator"] = { fg = "#6ca0a3" },

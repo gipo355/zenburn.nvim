@@ -11,6 +11,9 @@ end
 ---@param bg string
 ---@return string
 function M.blend(fg, alpha, bg)
+  if not (fg:match("^#%x%x%x%x%x%x$") and bg:match("^#%x%x%x%x%x%x$")) then
+    return fg
+  end
   local fr, fg_, fb = rgb(fg)
   local br, bg_, bb = rgb(bg)
   local function ch(a, b)

@@ -10,7 +10,7 @@ return function(c, opts)
     DapUIVariable = { fg = ui.fg },
     DapUIType = "@type",
     -- dap-ui has one value group, so values cannot be split by type
-    DapUIValue = { fg = syn.number },
+    DapUIValue = { fg = ui.fg },
     DapUIModifiedValue = { fg = syn.keyword },
     DapUIDecoration = { fg = ui.fg_faint },
     DapUIThread = { fg = syn.type },

@@ -34,7 +34,6 @@ function M.setup(opts)
       sp_cursearch = p.search_sp,
       bg_match = p.match_paren,
       bg_ref_write = p.write_ref,
-      bg_breakpoint = p.error_bg,
 
       fg = p.fg,
       fg_bright = p.fg_bright,
@@ -46,7 +45,7 @@ function M.setup(opts)
       fg_line_nr_cur = p.fg,
       fg_nontext = p.bg_hint,
       fg_whitespace = p.bg_hint,
-      fg_indent = p.bg_sel,
+      fg_indent = p.bg_gutter, -- VISUAL_INDENT_GUIDE
       fg_indent_scope = p.fg_faint,
       fg_border = p.bg_tooltip,
       fg_separator = p.bg_tooltip,
@@ -98,7 +97,7 @@ function M.setup(opts)
       sp_error = p.error,
       sp_warn = p.keyword,
       sp_info = p.info,
-      sp_hint = p.comment,
+      sp_hint = p.info,
       -- virtual text: same hue, pulled toward the background
       vt_error = U.blend(p.error_fg, 0.7, p.bg),
       vt_warn = U.blend(p.keyword, 0.7, p.bg),
