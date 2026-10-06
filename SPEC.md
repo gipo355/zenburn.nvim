@@ -391,3 +391,19 @@ floats on the editor bg with `5f5f5f` borders, `dim_inactive`, README.
 - Open: `DiagnosticUnderlineError` keeps IntelliJ's `e81a1a`, the only
   saturated primary in the theme. One role (`diag.sp_error`); `bc8383` is
   the candidate if it proves too loud.
+- 2026-10-06: `@keyword.operator` (`new`, `instanceof`, `and`) is a keyword,
+  following the "every @keyword.*" rule over the operator row.
+- 2026-10-06: lualine visual block is `dfaf8f`; `4f4f4f` from the phase 2
+  note is unreadable under a `3f3f3f` foreground.
+- 2026-10-06: `setup(opts)` only stores options; the theme is applied by
+  `:colorscheme zenburn` (`load()`). Precedence: defaults < `vim.g.zenburn`
+  < `setup(opts)`.
+- 2026-10-06: `plugins.auto` without lazy.nvim applies every file, because
+  lazy-loaded plugins are not in `package.loaded` when the colorscheme runs;
+  `plugins.auto = false` applies none unless named. `nvim-cmp` keeps a file,
+  it only loads when installed.
+- 2026-10-06: satellite, spectre, visual-multi and avante files are written
+  from their docs without an installed copy to check against; tiny-glimmer
+  animates between user-configured groups and defines none, so no file.
+- 2026-10-06: inside floats, implementers used `Visual` for the current row
+  (pickers, mini.files, blink docs) rather than `CursorLine`.
