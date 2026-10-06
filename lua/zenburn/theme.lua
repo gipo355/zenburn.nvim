@@ -19,7 +19,7 @@ function M.setup(opts)
       bg_gutter = t and none or p.bg_gutter,
       bg_dark = p.bg_dark,
       bg_inactive = p.bg_gutter,
-      bg_float = p.bg_dark,
+      bg_float = t and none or p.bg, -- SPEC phase 3: no bg change behind borders
       bg_doc = p.bg_doc,
       bg_statusline = t and none or p.bg_gutter,
       bg_visual = p.bg_sel,

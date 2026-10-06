@@ -55,7 +55,7 @@ return function(c, opts)
     ["@lsp.typemod.property.static"]  = "Constant",
     ["@lsp.typemod.variable.static"]  = "Constant",
     ["@lsp.typemod.variable.global"]  = "Constant",          -- lua_ls
-    ["@lsp.typemod.variable.defaultLibrary"] = "Constant",   -- console, Math
+    ["@lsp.typemod.variable.defaultLibrary"] = {},           -- console, Math: text, like IJ JS.GLOBAL_VARIABLE
     ["@lsp.typemod.variable.readonly"] = {},
     ["@lsp.typemod.variable.callable"] = "Function",
     ["@lsp.typemod.variable.injected"] = {},
