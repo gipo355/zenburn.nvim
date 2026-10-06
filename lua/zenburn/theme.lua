@@ -76,7 +76,7 @@ function M.setup(opts)
       type = p.type,
       interface = p.interface,
       static_fn = p.static_fn,
-      constant = p.constant,
+      constant = p.info, -- SPEC 5: d6d6ae is too close to text without italic
       field = p.fg, -- IJ renders fields as plain text (SPEC 5, screenshot)
       attribute = p.type,
       tag = p.tag,

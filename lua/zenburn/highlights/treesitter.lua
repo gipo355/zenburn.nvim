@@ -82,7 +82,7 @@ return function(c, opts)
     ["@punctuation.special"]        = { fg = syn.template },   -- ${} in templates
 
     ["@comment"]                    = "Comment",
-    ["@comment.documentation"]      = { fg = syn.comment, bold = true },   -- DEFAULT_DOC_COMMENT
+    ["@comment.documentation"]      = "Comment",   -- XML says bold; IJ renders /// lines plain (SPEC 5)
     ["@comment.error"]              = "Todo",
     ["@comment.warning"]            = "Todo",
     ["@comment.todo"]               = "Todo",

@@ -1,0 +1,46 @@
+return function(c, opts)
+  local ui, syn, g = c.ui, c.syn, c.git
+  return {
+    DiffviewNormal = { fg = ui.fg, bg = ui.bg_gutter },
+    DiffviewSignColumn = { bg = ui.bg_gutter },
+    -- hide `~` on the panel background
+    DiffviewEndOfBuffer = { fg = c.palette.bg_gutter },
+    DiffviewCursorLine = "CursorLine",
+    DiffviewFilePanelTitle = { fg = syn.type, bold = true },
+    DiffviewFilePanelCounter = { fg = ui.fg_dim },
+    DiffviewFilePanelFileName = { fg = ui.fg },
+    DiffviewFilePanelSelected = { fg = syn.keyword },
+    DiffviewFilePanelPath = { fg = ui.fg_faint },
+    DiffviewFilePanelInsertions = "Added",
+    DiffviewFilePanelDeletions = "Removed",
+    DiffviewFilePanelConflicts = { fg = g.conflict },
+    DiffviewFolderName = "Directory",
+    DiffviewFolderSign = { fg = ui.fg_faint },
+    DiffviewHash = { fg = ui.fg_dim },
+    DiffviewReference = { fg = syn.keyword },
+    DiffviewReflogSelector = { fg = syn.special },
+    DiffviewDim1 = { fg = ui.fg_faint },
+    DiffviewPrimary = { fg = syn.type },
+    DiffviewSecondary = { fg = syn.interface },
+    DiffviewStatusAdded = "Added",
+    DiffviewStatusUntracked = { fg = ui.fg_dim },
+    DiffviewStatusModified = "Changed",
+    DiffviewStatusRenamed = { fg = syn.interface },
+    DiffviewStatusCopied = { fg = syn.interface },
+    DiffviewStatusTypeChange = "Changed",
+    -- the plugin looks up this misspelled name for status `T`
+    DiffviewStatusTypeChanged = "Changed",
+    DiffviewStatusUnmerged = { fg = g.conflict },
+    DiffviewStatusUnknown = { fg = ui.fg_dim },
+    DiffviewStatusDeleted = "Removed",
+    DiffviewStatusBroken = "Removed",
+    DiffviewStatusIgnored = { fg = ui.fg_faint },
+    DiffviewDiffAdd = "DiffAdd",
+    DiffviewDiffAddAsDelete = "DiffDelete",
+    DiffviewDiffChange = "DiffChange",
+    DiffviewDiffText = "DiffText",
+    -- filler lines only; real deletions use DiffviewDiffAddAsDelete
+    DiffviewDiffDelete = { fg = ui.fg_faint, bg = c.none },
+    DiffviewDiffDeleteDim = "DiffviewDiffDelete",
+  }
+end

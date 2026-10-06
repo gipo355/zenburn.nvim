@@ -1,0 +1,40 @@
+return function(c, opts)
+  local ui, syn, d = c.ui, c.syn, c.diag
+  return {
+    DapUINormal = { fg = ui.fg, bg = ui.bg_gutter },
+    -- hide `~` on the sidebar background
+    DapUIEndofBuffer = { fg = c.palette.bg_gutter },
+    DapUIFloatNormal = "NormalFloat",
+    DapUIFloatBorder = "FloatBorder",
+    DapUIScope = { fg = ui.fg, bold = true },
+    DapUIVariable = { fg = ui.fg },
+    DapUIType = "@type",
+    -- dap-ui has one value group, so values cannot be split by type
+    DapUIValue = { fg = syn.number },
+    DapUIModifiedValue = { fg = syn.keyword },
+    DapUIDecoration = { fg = ui.fg_faint },
+    DapUIThread = { fg = syn.type },
+    DapUIStoppedThread = { fg = syn.keyword },
+    DapUIFrameName = { fg = ui.fg },
+    DapUICurrentFrameName = { fg = syn.keyword, bold = true },
+    DapUISource = { fg = ui.fg_dim },
+    DapUILineNumber = { fg = ui.fg_line_nr },
+    DapUIWatchesEmpty = { fg = ui.fg_faint },
+    DapUIWatchesValue = { fg = syn.number },
+    DapUIWatchesError = { fg = d.error },
+    DapUIBreakpointsPath = { fg = syn.type },
+    DapUIBreakpointsInfo = { fg = ui.fg_dim },
+    DapUIBreakpointsCurrentLine = { fg = syn.keyword, bold = true },
+    DapUIBreakpointsLine = "DapUILineNumber",
+    DapUIBreakpointsDisabledLine = { fg = ui.fg_faint },
+    DapUIWinSelect = { fg = syn.keyword, bold = true },
+    DapUIPlayPause = { fg = syn.todo },
+    DapUIStop = { fg = d.error },
+    DapUIRestart = { fg = ui.fg_dim },
+    DapUIStepOver = { fg = ui.fg_dim },
+    DapUIStepInto = { fg = ui.fg_dim },
+    DapUIStepBack = { fg = ui.fg_dim },
+    DapUIStepOut = { fg = ui.fg_dim },
+    DapUIUnavailable = { fg = ui.fg_faint },
+  }
+end

@@ -1,0 +1,32 @@
+return function(c, opts)
+  local ui, syn = c.ui, c.syn
+  return {
+    SagaNormal = "NormalFloat",
+    SagaBorder = "FloatBorder",
+    SagaTitle = "FloatTitle",
+    SagaBeacon = { bg = ui.bg_visual },
+    SagaVirtLine = { fg = ui.fg_indent },
+    SagaSpinnerTitle = { fg = syn.keyword },
+    SagaSpinner = { fg = syn.keyword },
+    SagaText = { fg = ui.fg_dim },
+    SagaSelect = { fg = syn.keyword },
+    SagaFinderFname = { fg = ui.fg },
+    SagaDetail = { fg = ui.fg_dim },
+    SagaInCurrent = { fg = syn.keyword },
+    SagaCount = { fg = syn.keyword, bg = ui.bg_sel },
+    SagaSep = { fg = ui.fg_faint },
+    SagaLightBulb = { fg = syn.keyword },
+    SagaWinbarSep = { fg = ui.fg_faint },
+    SagaWinbarFileName = { fg = ui.fg },
+    SagaWinbarFolderName = { fg = ui.fg_dim },
+    SagaWinbarFolder = { fg = ui.fg_directory },
+    HoverNormal = "NormalFloat",
+    HoverBorder = "FloatBorder",
+    RenameNormal = "NormalFloat",
+    RenameBorder = "FloatBorder",
+    RenameMatch = "Search",
+    CodeActionText = { fg = ui.fg },
+    CodeActionNumber = { fg = syn.keyword },
+    DiagnosticShowBorder = "FloatBorder",
+  }
+end
