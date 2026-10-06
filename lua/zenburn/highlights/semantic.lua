@@ -28,8 +28,8 @@ return function(c, opts)
     ["@lsp.type.method"]         = "Function",
     ["@lsp.type.member"]         = "Function",           -- tsserver
     ["@lsp.type.macro"]          = "Function",
-    ["@lsp.type.property"]       = { fg = syn.field },
-    ["@lsp.type.recordComponent"] = { fg = syn.field },
+    ["@lsp.type.property"]       = {},                   -- treesitter decides: fields are text, SCREAMING_CASE is @constant
+    ["@lsp.type.recordComponent"] = {},
     ["@lsp.type.variable"]       = {},                   -- treesitter decides
     ["@lsp.type.parameter"]      = {},
     ["@lsp.type.keyword"]        = "Keyword",
