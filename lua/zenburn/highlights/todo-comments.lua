@@ -14,7 +14,7 @@ return function(c, opts)
   for kw, color in pairs(colors) do
     groups["TodoFg" .. kw] = { fg = color }
     groups["TodoSign" .. kw] = { fg = color }
-    groups["TodoBg" .. kw] = { fg = c.palette.bg, bg = color, bold = true }
+    groups["TodoBg" .. kw] = { fg = color, bold = true } -- keyword in color, no block
   end
   return groups
 end

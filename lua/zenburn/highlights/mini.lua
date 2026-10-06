@@ -54,10 +54,10 @@ return function(c, opts)
     MiniPickPromptPrefix = { fg = syn.keyword, bg = ui.bg_float },
 
     -- mini.hipatterns
-    MiniHipatternsFixme = { fg = p.bg, bg = d.error, bold = true },
-    MiniHipatternsHack = { fg = p.bg, bg = d.warn, bold = true },
-    MiniHipatternsTodo = { fg = p.bg, bg = syn.todo, bold = true },
-    MiniHipatternsNote = { fg = p.bg, bg = syn.type, bold = true },
+    MiniHipatternsFixme = { fg = d.error, bold = true },
+    MiniHipatternsHack = { fg = d.warn, bold = true },
+    MiniHipatternsTodo = { fg = syn.todo, bold = true },
+    MiniHipatternsNote = { fg = syn.type, bold = true },
 
     -- mini.diff
     MiniDiffSignAdd = { fg = g.add },
