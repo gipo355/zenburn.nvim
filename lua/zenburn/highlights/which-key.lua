@@ -1,9 +1,23 @@
-local c = require("zenburn.palette")
-return {
-    WhichKey = { fg=c.Function.fg, bold=true }, -- the key
-    WhichKeyGroup = { fg=c.Float.fg }, -- a group
-    WhichKeySeparator = { fg=c.Pmenu.fg }, -- the separator between the key and its label
-    WhichKeyDesc = { fg=c.Normal.fg }, -- the label of the key
-    WhichKeyFloat = c.NormalFloat, -- Normal in the popup window
-    WhichKeyValue = { fg=c.Comment.fg }, -- used by plugins that provide values
-}
+return function(c, opts)
+  local ui, syn = c.ui, c.syn
+  return {
+    WhichKey = { fg = syn.keyword, bold = true },
+    WhichKeyGroup = { fg = syn.type },
+    WhichKeyDesc = { fg = ui.fg },
+    WhichKeySeparator = { fg = ui.fg_faint },
+    WhichKeyValue = { fg = ui.fg_dim },
+    WhichKeyNormal = "NormalFloat",
+    WhichKeyBorder = "FloatBorder",
+    WhichKeyTitle = "FloatTitle",
+    WhichKeyIcon = { fg = syn.interface },
+    WhichKeyIconAzure = { fg = syn.interface },
+    WhichKeyIconBlue = { fg = syn.interface },
+    WhichKeyIconCyan = { fg = syn.template },
+    WhichKeyIconGreen = { fg = syn.todo },
+    WhichKeyIconGrey = { fg = ui.fg_dim },
+    WhichKeyIconOrange = { fg = syn.field },
+    WhichKeyIconPurple = { fg = c.palette.magenta },
+    WhichKeyIconRed = { fg = c.diag.error },
+    WhichKeyIconYellow = { fg = syn.keyword },
+  }
+end

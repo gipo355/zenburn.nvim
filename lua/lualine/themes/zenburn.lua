@@ -1,39 +1,27 @@
-local c = require("zenburn.palette")
+local opts = require("zenburn.config").get()
+local c = require("zenburn.theme").setup(opts)
+local p = c.palette
+
+local bold = opts.bold and "bold" or nil
+
+local function mode(color)
+  return {
+    a = { fg = p.bg, bg = color, gui = bold },
+    b = { fg = c.ui.fg, bg = p.bg_sel },
+    c = { fg = c.ui.fg_dim, bg = c.ui.bg_statusline },
+  }
+end
+
 return {
-	normal = {
-		a = {bg =c.SpecialComment.fg, fg=c.SignColumn.fg, gui="bold"},
-		b = {bg =c.LineNr.fg, fg=c.Normal.fg},
-		c = {bg =c.CursorLine.bg, fg=c.Normal.fg},
-		z = {bg =c.Delimiter.fg, fg=c.SignColumn.fg},
-	},
-	insert = {
-		a = {bg =c.Function.fg, fg=c.SignColumn.fg, gui="bold"},
-		b = {bg =c.LineNr.fg, fg=c.Normal.fg},
-		c = {bg =c.CursorLine.bg, fg=c.Normal.fg},
-		z = {bg =c.Delimiter.fg, fg=c.SignColumn.fg},
-	},
-	visual = {
-		a = {bg =c.Define.fg, fg=c.SignColumn.fg, gui="bold"},
-		b = {bg =c.LineNr.fg, fg=c.Normal.fg},
-		c = {bg =c.CursorLine.bg, fg=c.Normal.fg},
-		z = {bg =c.Delimiter.fg, fg=c.SignColumn.fg},
-	},
-	replace = {
-		a = {bg =c.Number.fg, fg=c.SignColumn.fg, gui="bold"},
-		b = {bg =c.LineNr.fg, fg=c.Normal.fg},
-		c = {bg =c.CursorLine.bg, fg=c.Normal.fg},
-		z = {bg =c.Delimiter.fg, fg=c.SignColumn.fg},
-	},
-	command = {
-		a = {bg =c.Boolean.fg, fg=c.SignColumn.fg, gui="bold"},
-		b = {bg =c.LineNr.fg, fg=c.Normal.fg},
-		c = {bg =c.CursorLine.bg, fg=c.Normal.fg},
-		z = {bg =c.Delimiter.fg, fg=c.SignColumn.fg},
-	},
-	inactive = {
-		a = {bg =c.Delimiter.fg, fg=c.SignColumn.fg, gui="bold"},
-		b = {bg =c.LineNr.fg, fg=c.Normal.fg},
-		c = {bg =c.CursorLine.bg, fg=c.Normal.fg},
-		z = {bg =c.Delimiter.fg, fg=c.SignColumn.fg},
-	},
+  normal = mode(p.fg),
+  insert = mode(p.green),
+  visual = mode(p.field),
+  replace = mode(p.string),
+  command = mode(p.keyword),
+  terminal = mode(p.interface),
+  inactive = {
+    a = { fg = c.ui.fg_faint, bg = c.ui.bg_statusline },
+    b = { fg = c.ui.fg_faint, bg = c.ui.bg_statusline },
+    c = { fg = c.ui.fg_faint, bg = c.ui.bg_statusline },
+  },
 }

@@ -1,83 +1,66 @@
+-- Hex values only. Source: reference/intellij/zenburn.xml (editor scheme) and
+-- reference/intellij/zenburn.theme.json (UI). Entries marked `vim` keep the
+-- original Vim Zenburn value where IntelliJ has no opinion.
 return {
-	Boolean = { fg="#dca3a3", },
-	Character = { fg="#dca3a3", bold=true, },
-	ColorColumn = { bg="#484848", },
-	Comment = { fg="#7f9f7f", },
-	Conditional = { fg="#f0dfaf", bold=true, },
-	Constant = { fg="#dca3a3", bold=true, },
-	Cursor = { fg="#000d18", bg="#8faf9f", bold=true, },
-	CursorColumn = { bg="#4f4f4f", },
-	CursorLine = { bg="#434443", },
-	CursorLineNr = { fg="#d2d39b", bg="#2f2f2f" },
-	Debug = { fg="#bca3a3", bold=true, },
-	Define = { fg="#ffcfaf", bold=true, },
-	Delimiter = { fg="#8f8f8f", },
-	DiffAdd = { fg="#709080", bg="#313c36", bold=true, },
-	DiffChange = { bg="#333333", },
-	DiffDelete = { fg="#333333", bg="#464646", },
-	DiffText = { fg="#ecbcbc", bg="#41363c", bold=true, },
-	Directory = { fg="#dcdccc", bold=true, },
-	ErrorMsg = { fg="#80d4aa", bg="#2f2f2f", bold=true, },
-	Exception = { fg="#c3bf9f", bold=true, },
-	Float = { fg="#c0bed1", },
-	FoldColumn = { fg="#93b3a3", bg="#3f4040", },
-	Folded = { fg="#93b3a3", bg="#3f4040", },
-	Function = { fg="#efef8f", },
-	Identifier = { fg="#efdcbc", },
-	Include = { fg="#dfaf8f" ,bold=true, },
-	IncSearch = { bg="#f8f893", fg="#385f38", },
-	Keyword = { fg="#f0dfaf", bold=true, },
-	Label = { fg="#dfcfaf", underline=true, },
-	LineNr = { fg="#5d6262", bg="#353535" },
-	LspInlayHint = { fg="#ffcfaf", },
-	Macro = { fg="#ffcfaf", bold=true, },
-	MatchParen = { fg="#b2b2a0", bg="#2e2e2e", bold=true, },
-	ModeMsg = { fg="#ffcfaf", },
-	MoreMsg = { fg="#ffffff", bold=true, },
-	NonText = { fg="#5b605e", bold=true, },
-	Normal = { fg="#dcdccc", bg="#3f3f3f", },
-	NormalFloat = { bg="#353535", fg="#9f9f9f", },
-	Number = { fg="#8cd0d3", },
-	Operator = { fg="#f0efd0", },
-	PmenuSel = { bg="#242424", fg="#d0d0a0", bold=true, },
-	PmenuThumb = { bg="#a0afa0", fg="#040404", },
-	Pmenu = { bg="#2c2e2e", fg="#9f9f9f", },
-	PmenuSbar = { bg="#2e3330", fg="#000000", },
-	PreCondit = { fg="#dfaf8f", bold=true, },
-	PreProc = { fg="#ffcfaf", bold=true, },
-	Question = { fg="#ffffff", bold=true, },
-	Repeat = { fg="#ffd7a7", bold=true, },
-	Search = { fg="#ffffe0", bg="#284f28", },
-	SignColumn = { fg="#3f3f3f", bold=true, },
-	Special = { fg="#cfbfaf", },
-	SpecialChar = { fg="#dca3a3", bold=true, },
-	SpecialComment = { fg="#82a282", bold=true, },
-	SpecialKey = { fg="#9ece9e", },
-	SpellBad = { sp="#bc6c4c", fg="#dc8c6c", },
-	SpellCap = { sp="#6c6c9c", fg="#8c8cbc", },
-	SpellLocal = { sp="#7cac7c", fg="#9ccc9c", },
-	SpellRare = { sp="#bc6c9c", fg="#bc8cbc", },
-	Statement = { fg="#e3ceab", },
-	StatusLine = { fg="#313633", bg="#ccdc90", },
-	StatusLineNC = { fg="#2e3330", bg="#88b090", },
-	StorageClass = { fg="#c3bf9f", bold=true, },
-	String = { fg="#cc9393", },
-	Structure = { fg="#efefaf", bold=true, },
-	TabLine = { fg="#b6bf98", bg="#353535", bold=true, },
-	TabLineFill = { fg="#cfcfaf", bg="#353535", bold=true, },
-	TabLineSel = { fg="#efefef", bg="#3a3a39", bold=true, },
-	Tag = { fg="#e89393", bold=true, },
-	Title = { fg="#efefef", bold=true, },
-	Todo = { fg="#dfdfdf", bold=true, },
-	Type = { fg="#dfdfbf", },
-	Typedef = { fg="#dfe4cf", bold=true, },
-	Underlined = { fg="#dcdccc", underline=true, },
-	VertSplit = { fg="#dfaf8f", bg="#3f3f3f", },
-	Visual = { bg="#233323" },
-	VisualNOS = { bg="#233323" },
-	WarningMsg = { fg="#ffffff", bg="#333333", bold=true, },
-	WildMenu = { bg="#2c302d", fg="#cbecd0", underline=true, },
-	WinSeparator = { fg="#dfaf8f", bg="#3f3f3f", },
+  -- surfaces
+  bg = "#3f3f3f", -- TEXT
+  bg_gutter = "#383838", -- GUTTER_BACKGROUND, VISUAL_INDENT_GUIDE
+  bg_dark = "#303030", -- CARET_ROW_COLOR, CONSOLE_BACKGROUND_KEY
+  bg_doc = "#2b2b2b", -- DOCUMENTATION_COLOR, RIGHT_MARGIN_COLOR
+  bg_ui = "#3a3a3a", -- theme.json background, SEARCH_RESULT_ATTRIBUTES
+  bg_sel = "#4f4f4f", -- SELECTION_BACKGROUND, TEARLINE_COLOR
+  bg_hint = "#505050", -- INLINE_PARAMETER_HINT bg, WHITESPACES
+  bg_ui_sel = "#545454", -- theme.json selectionBackground
+  bg_tooltip = "#5f5f5f", -- TOOLTIP, NOTIFICATION_BACKGROUND, METHOD_SEPARATORS_COLOR
+  bg_diff_sep = "#6f6f6f", -- DIFF_SEPARATORS_BACKGROUND, SELECTED_TEARLINE_COLOR
+
+  -- text
+  fg = "#dcdccc", -- TEXT
+  fg_bright = "#efefef", -- vim: Title
+  fg_ui = "#c6c6c6", -- theme.json foreground
+  fg_breadcrumb = "#c7c4c4", -- BREADCRUMBS_DEFAULT
+  fg_dim = "#aaa9a9", -- INLINE_PARAMETER_HINT fg
+  fg_gray = "#999999", -- CONSOLE_GRAY_OUTPUT
+  fg_delim = "#8f8f8f", -- vim: Delimiter (XML is silent on braces)
+  fg_faint = "#656555", -- LINE_NUMBERS_COLOR, DOC_COMMENT_GUIDE
+
+  -- syntax
+  keyword = "#f0dfaf", -- DEFAULT_KEYWORD, WARNING_ATTRIBUTES
+  string = "#cc9393", -- DEFAULT_STRING, errorForeground
+  escape = "#ac7373", -- DEFAULT_VALID_STRING_ESCAPE, CONSOLE_ERROR_OUTPUT
+  escape_bad = "#cc867e", -- DEFAULT_INVALID_STRING_ESCAPE
+  number = "#94bff3", -- DEFAULT_NUMBER, CTRL_CLICKABLE, DOC_COMMENT_LINK
+  comment = "#5f7f5f", -- DEFAULT_LINE_COMMENT, IDENTIFIER_UNDER_CARET sp
+  green = "#7f9f7f", -- TODO_DEFAULT_ATTRIBUTES, ADDED_LINES_COLOR, QUESTION_HINT
+  type = "#6ca0a3", -- DEFAULT_CLASS_NAME, DEFAULT_METADATA, DEFAULT_DOC_COMMENT_TAG
+  type_ref = "#366060", -- DEFAULT_CLASS_REFERENCE (unused: too dark, see SPEC)
+  interface = "#7cb8bb", -- DEFAULT_INTERFACE_NAME
+  static_fn = "#8acdd0", -- DEFAULT_STATIC_METHOD
+  constant = "#d6d6ae", -- DEFAULT_CONSTANT, DEFAULT_GLOBAL_VARIABLE
+  field = "#dfaf8f", -- DEFAULT_INSTANCE_FIELD, DEFAULT_ATTRIBUTE
+  doc_value = "#bfebbf", -- DEFAULT_DOC_COMMENT_TAG_VALUE, CONSOLE_GREEN_BRIGHT
+  doc_markup = "#9fc59f", -- DEFAULT_DOC_MARKUP
+  template = "#93e0e3", -- DEFAULT_TEMPLATE_LANGUAGE_COLOR, CONSOLE_CYAN
+  tag = "#b6b6a7", -- DEFAULT_TAG
+  tag_match = "#5c888b", -- MATCHED_TAG_NAME, XML_TAG_NAME
+  info = "#d0bf8f", -- INFO_ATTRIBUTES, CONSOLE_YELLOW
+  magenta = "#dc8cc3", -- CONSOLE_MAGENTA, rainbow 4
+  cyan = "#8cd0d3", -- CONSOLE_BLUE_BRIGHT
+  red_bright = "#dca3a3", -- CONSOLE_RED_BRIGHT, BAD_CHARACTER
+
+  -- state
+  error = "#e81a1a", -- ERRORS_ATTRIBUTES (undercurl only, never as fill)
+  error_fg = "#bc8383", -- LOG_ERROR_OUTPUT, rainbow 1
+  error_bg = "#8c5353", -- BREAKPOINT_ATTRIBUTES, DIFF_DELETED, WRONG_REFERENCES
+  add_bg = "#364936", -- DIFF_INSERTED
+  change = "#415f69", -- MODIFIED_LINES_COLOR
+  search = "#425f44", -- TEXT_SEARCH_RESULT_ATTRIBUTES
+  search_sp = "#56ac48", -- TEXT_SEARCH_RESULT_ATTRIBUTES sp
+  write_ref = "#835353", -- WRITE_SEARCH_RESULT_ATTRIBUTES
+  match_paren = "#3b514d", -- MATCHED_BRACE_ATTRIBUTES
+  folded = "#93b3a3", -- vim: Folded fg
+  folded_bg = "#3f4040", -- vim: Folded bg
+
+  -- ANGLE_BRACKETS_RAINBOW_COLOR0..4
+  rainbow = { "#709080", "#bc8383", "#f0dfaf", "#93e0e3", "#dc8cc3" },
 }
-
-

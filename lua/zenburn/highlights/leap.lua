@@ -1,6 +1,9 @@
-local c = require("zenburn.palette")
-return {
-    LeapMatch = { fg=c.Cursor.fg, bg=c.Macro.fg },
-    LeapLabelPrimary = { fg=c.Cursor.fg, bg=c.Function.fg },
-    LeapLabelSecondary = { fg=c.Cursor.fg, bg=c.Identifier.fg },
-}
+return function(c, opts)
+  local p = c.palette
+  return {
+    LeapMatch = { fg = p.bg, bg = p.keyword },
+    LeapLabelPrimary = { fg = p.bg, bg = p.keyword, bold = true },
+    LeapLabelSecondary = { fg = p.bg, bg = p.field },
+    LeapBackdrop = { fg = c.ui.fg_dim },
+  }
+end

@@ -1,27 +1,29 @@
-local c = require("zenburn.palette")
-local d = require("zenburn.highlights.diagnostic")
-return {
-	TroubleFoldIcon = c.Special,
-	TroubleIndent = c.Special,
-	TroubleCount = c.Special,
-	TroubleNormal = { fg=c.Normal.fg },
-	TroubleLocation = { fg=c.Pmenu.fg },
-	TroubleError = d.DiagnosticError,
-	TroubleSignError = d.DiagnosticError,
-	TroubleTextError = d.DiagnosticError,
-	TroubleWarning = d.DiagnosticWarn,
-	TroubleSignWarning = d.DiagnosticWarn,
-	TroubleTextWarning = d.DiagnosticWarn,
-	TroubleInformation = d.DiagnosticInfo,
-	TroubleSignInformation = d.DiagnosticInfo,
-	TroubleTextInformation = d.DiagnosticInfo,
-	TroubleHint = d.DiagnosticHint,
-	TroubleSignHint = d.DiagnosticHint,
-	TroubleTextHint = d.DiagnosticHint,
-	-- TroubleSignOther = c.Pmenu,
-	-- TroublePreview = c.Pmenu,
-	-- TroubleSource = c.Pmenu,
-	-- TroubleCode = c.Pmenu,
-	-- TroubleFile = c.Pmenu,
-}
-
+return function(c, opts)
+  local ui, syn, d = c.ui, c.syn, c.diag
+  return {
+    TroubleNormal = { fg = ui.fg, bg = ui.bg_gutter },
+    TroubleNormalNC = "TroubleNormal",
+    TroubleText = { fg = ui.fg },
+    TroubleCount = { fg = syn.keyword },
+    TroubleIndent = { fg = ui.fg_faint },
+    TroubleIndentFoldOpen = { fg = ui.fg_faint },
+    TroubleIndentFoldClosed = { fg = ui.fg_faint },
+    TroubleIconDirectory = { fg = ui.fg_directory },
+    TroubleIconFile = { fg = ui.fg },
+    TroubleFilename = { fg = syn.type },
+    TroubleDirectory = { fg = ui.fg_directory },
+    TroublePos = { fg = ui.fg_faint },
+    TroubleSource = { fg = ui.fg_dim },
+    TroubleCode = { fg = ui.fg_dim },
+    TroublePreview = { bg = ui.bg_sel },
+    TroubleBasename = { fg = syn.type },
+    TroubleIconError = "DiagnosticError",
+    TroubleIconWarning = "DiagnosticWarn",
+    TroubleIconInformation = "DiagnosticInfo",
+    TroubleIconHint = "DiagnosticHint",
+    TroubleError = "DiagnosticError",
+    TroubleWarning = "DiagnosticWarn",
+    TroubleInformation = "DiagnosticInfo",
+    TroubleHint = "DiagnosticHint",
+  }
+end

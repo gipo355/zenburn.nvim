@@ -1,1 +1,1 @@
-require("zenburn").setup()
+require("zenburn").load()
