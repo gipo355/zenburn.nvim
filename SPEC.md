@@ -380,8 +380,10 @@ floats on the editor bg with `5f5f5f` borders, `dim_inactive`, README.
   edge without a border; every other float keeps the editor background with
   a `5f5f5f` border (phase 3 bullet).
 - 2026-10-06: rainbow set for blink.pairs, indent guides and markdown
-  headings is `field, type, constant, keyword, green` (warm only); the
-  IntelliJ ANGLE_BRACKETS set with pink and cyan stays in the palette unused.
+  headings is IntelliJ's Rainbow Brackets set (`*_BRACKETS_RAINBOW_COLOR0..4`:
+  `709080 bc8383 f0dfaf 93e0e3 dc8cc3`). That plugin is what paints the
+  dim parens and salmon braces in the IntelliJ screenshots; the phase 2
+  "warm hues only" note is superseded because these are IntelliJ's own.
 - 2026-10-06: no compiled highlight cache. Load measured at ~0.5 ms for the
   owner's plugin set and ~1 ms with every file applied.
 - 2026-10-06: the owner's dotfiles re-apply `BlinkPairsWarm1..3` gruvbox

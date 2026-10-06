@@ -121,8 +121,9 @@ function M.setup(opts)
       text = p.change,
     },
 
-    -- warm hues only (SPEC phase 2); p.rainbow keeps the IJ set for reference
-    rainbow = { p.field, p.type, p.constant, p.keyword, p.green },
+    -- IntelliJ Rainbow Brackets set (*_BRACKETS_RAINBOW_COLOR0..4): level 0
+    -- is the dim gray-green parens, level 1 the salmon braces
+    rainbow = p.rainbow,
 
     terminal = {
       black = p.bg,
