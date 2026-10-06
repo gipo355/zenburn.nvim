@@ -46,24 +46,29 @@ Neovim 0.12.
   Where neither IntelliJ nor Darcula has an opinion, keep the Vim-original hex
   already in `lua/zenburn/palette.lua`.
 
-## 3. Repo map (as forked)
+## 3. Repo map (after phase 0, 2026-10-06)
 
 ```
-colors/zenburn.lua              -> require("zenburn").setup()
-lua/zenburn/init.lua            -> setup(): clears ns, sets bg/termguicolors,
-                                   applies every table in highlights/init.lua,
-                                   sets vim.g.colors_name = "zenburn.nvim"  (!)
-lua/zenburn/palette.lua         -> flat table: legacy group -> {fg,bg,bold,...}
-lua/zenburn/highlights/init.lua -> list of highlight tables to apply, in order
-lua/zenburn/highlights/*.lua    -> core (= palette), diagnostic, lsp, treesitter
-                                   (dead TS* groups), gitsigns, which-key, leap,
-                                   indent_blankline, nvim-tree, nvim-cmp, trouble,
-                                   neotest, hydra, symbols-outline
-lua/lualine/themes/zenburn.lua  -> lualine theme (only found if lualine theme is
-                                   literally "zenburn"; "auto" looks up
-                                   colors_name, i.e. "zenburn.nvim", and misses)
-reference/intellij/             -> the IntelliJ plugin's scheme files (MIT)
+colors/zenburn.lua                -> require("zenburn").load()
+lua/zenburn/init.lua              -> setup(opts) stores options; load() applies
+                                     theme, sets colors_name = "zenburn", terminal colors
+lua/zenburn/config.lua            -> defaults; get() = defaults < vim.g.zenburn < setup()
+lua/zenburn/palette.lua           -> named hex, each with its IntelliJ attribute
+lua/zenburn/theme.lua             -> roles: ui.*, syn.*, diag.*, git.*, diff.*, rainbow, terminal
+lua/zenburn/util.lua              -> blend, finalize (links, bold strip), lazy plugin list
+lua/zenburn/highlights/init.lua   -> lazy plugin name -> file map, always = base,
+                                     treesitter, semantic, kinds; auto-detect via lazy
+lua/zenburn/highlights/base.lua   -> editor chrome, legacy syntax, diagnostics, lsp core
+lua/zenburn/highlights/treesitter.lua, semantic.lua, kinds.lua
+lua/zenburn/highlights/<plugin>.lua -> `return function(c, opts) return {...} end`, roles only
+lua/lualine/themes/zenburn.lua    -> built from theme roles, found by lualine `auto`
+scripts/check-parity.lua          -> headless done-check (section 4)
+scripts/render.lua                -> treesitter render of a file range to HTML
+reference/intellij/               -> the IntelliJ plugin's scheme files (MIT)
 ```
+
+Upstream layout for reference: `f5ee12b` (flat palette keyed by legacy group,
+`highlights/*` returning static tables, dead `TS*` groups).
 
 ## 4. Dev loop
 
@@ -87,8 +92,24 @@ repo, branch `dots-subtree`).
   nvim --headless -c 'lua for _,g in ipairs{"Normal","Keyword","String","Function","Comment","Number","CursorLine","Visual","MatchParen","LspReferenceText"} do local h=vim.api.nvim_get_hl(0,{name=g}); print(g, h.fg and ("%06x"):format(h.fg), h.bg and ("%06x"):format(h.bg), h.bold, h.underline) end' -c qa
   ```
 
-  Turn this into `scripts/check-parity.lua` driven by a table (section 6) so
-  the result is a diff, not eyeballing.
+  Done as `scripts/check-parity.lua` (section 5 table, zero italic, bold
+  toggle), run from the repo root:
+
+  ```sh
+  nvim --headless --clean --cmd 'set rtp+=.' -l scripts/check-parity.lua
+  ```
+
+- Visual check without a session: `scripts/render.lua` renders a file range
+  with treesitter captures to HTML, headless Chrome turns it into a PNG:
+
+  ```sh
+  nvim --headless --clean \
+    --cmd 'set rtp+=.,~/.local/share/nvim/lazy/nvim-treesitter,~/.local/share/nvim/lazy/nvim-treesitter/runtime' \
+    -l scripts/render.lua File.java out.html 40 100
+  google-chrome-stable --headless=new --screenshot=out.png --window-size=1100,1300 out.html
+  ```
+
+  LSP tokens are not rendered this way; `:Inspect` in a live session for those.
 - Visual check: open the same Java and TypeScript file in IntelliJ and Neovim
   side by side (Java: fields, static method, interface, annotation, constant,
   javadoc with `@param`; TS: decorator, interface, enum, template string).
@@ -204,6 +225,35 @@ Confirmed against a live screenshot, which the XML alone doesn't make obvious:
 - Project tree selection is a muted green-gray block; that's the UI theme, out
   of scope except as inspiration for `Visual`/picker selection (`4f4f4f`).
 
+### Resolutions (2026-10-06, after side-by-side with IntelliJ)
+
+- DEFAULT_CLASS_REFERENCE `366060`: not used. Class references render as
+  CLASS_NAME teal in the live screenshot. `type_ref` stays in the palette.
+- Parentheses/brackets: `@punctuation.bracket` = Vim's `8f8f8f` (XML silent,
+  screenshot shows them dimmer than text, fallback rule applies).
+  `@punctuation.delimiter` (`, ; .`) = text.
+- DEFAULT_INSTANCE_FIELD orange bold: the live screenshot shows fields
+  (`emailServerRepository`) as plain text, no orange anywhere. `syn.field` =
+  text; `@variable.member`, `@property`, `@lsp.type.property` are plain.
+  Static fields and constants come from `@lsp.typemod.property.static`.
+- DEFAULT_CONSTANT `d6d6ae`: indistinguishable from text without the italic.
+  `syn.constant` = `d0bf8f` (the allowed deviation above), bold kept.
+- DEFAULT_DOC_COMMENT bold: `///` doc lines render plain green in the
+  screenshot; `@comment.documentation` links to Comment.
+- SEARCH_RESULT `3a3a3a` is invisible on `3f3f3f`; `Search` uses
+  TEXT_SEARCH_RESULT `425f44` (what Ctrl+F shows), `CurSearch` adds an
+  underline in `56ac48` as the "current" cue instead of IntelliJ's border.
+- Java-specific XML keys are ignored because the screenshot contradicts them:
+  PARAMETER_ATTRIBUTES / LOCAL_VARIABLE_ATTRIBUTES `dfaf8f`,
+  METHOD_DECLARATION_ATTRIBUTES `93e0e3`, JAVA_NUMBER `7f9f7f`,
+  STATIC_FINAL_FIELD_ATTRIBUTES `dfaf8f`, CLASS_NAME_ATTRIBUTES `7cb8bb`,
+  ENUM_NAME_ATTRIBUTES `7f9f7f`, INSTANCE_FIELD_ATTRIBUTES underline.
+  `DEFAULT_*` rows are the truth.
+- INJECTED_LANGUAGE_FRAGMENT: ignored (regex bg in strings).
+- `@markup.italic` carries emphasis with `doc_value` `bfebbf`, no slant.
+- `@type.builtin` (`int`, `string`) and `@variable.builtin` (`this`) are
+  keywords, as in IntelliJ.
+
 ## 5b. Architecture inspiration (modern Neovim themes)
 
 Steal structure, not colors. Reference implementations worth reading before
@@ -239,6 +289,8 @@ phase, imperative subject.
 
 ### Phase 0: scaffolding
 
+Done in `7270765` together with phase 1 (the restructure needed the values).
+
 - Restructure as palette.lua (hex) / theme.lua (roles) / highlights/<plugin>.lua,
   applied only for plugins present in `package.loaded` or lazy's plugin list
   (tokyonight pattern). Keep `require("zenburn").setup()` as the entry.
@@ -259,6 +311,8 @@ phase, imperative subject.
 
 ### Phase 1: palette parity
 
+Done (`7270765` and follow-ups, parity script green, Java and TS renders checked).
+
 Apply every row of section 5 to `palette.lua` and a new
 `highlights/treesitter.lua` (rewritten with `@` captures) and
 `highlights/lsp.lua` (with `@lsp.*`). Resolve the two SUSPICIOUS rows by
@@ -266,6 +320,10 @@ looking at IntelliJ first. Done when `check-parity.lua` is green and the
 side-by-side Java/TS screenshots match.
 
 ### Phase 2: plugin coverage for my stack
+
+Done in `038302e` for every installed plugin plus telescope, lspsaga,
+indent-blankline and rainbow-delimiters as uninstalled files. Not covered:
+satellite, tiny-glimmer, spectre, visual-multi, avante (not installed).
 
 Groups for, in priority order: blink.cmp (menu, selection, kind icons, doc,
 signature), snacks (picker, notifier, indent, dashboard, input), telescope,
@@ -280,6 +338,9 @@ tiny-glimmer, grug-far/spectre. Avante/codecompanion/copilot/sidekick last.
 Check each plugin's `:help <plugin>-highlights` for the real group names.
 
 ### Phase 3: polish beyond IntelliJ
+
+Done except the README screenshot: terminal colors, dimmed virtual text,
+floats on the editor bg with `5f5f5f` borders, `dim_inactive`, README.
 
 - `vim.g.terminal_color_0..15` from the Zenburn ANSI palette.
 - Diagnostic virtual text and signs in the undercurl colors but dimmed
@@ -308,3 +369,25 @@ Check each plugin's `:help <plugin>-highlights` for the real group names.
   config.
 - Upstream commit pinned at `f5ee12b`; no intention to upstream, the goal is
   a different look.
+- 2026-10-06: `@lsp.typemod.property.static` maps to the constant color.
+  Neovim sets one `@lsp.typemod.<type>.<mod>` mark per modifier at equal
+  priority, so "static readonly" cannot be one group; `static final` is the
+  common Java case, a non-final static field also shows as a constant.
+- 2026-10-06: `@lsp.type.property` and `@lsp.type.variable` are empty so
+  treesitter decides; a jdtls property token without modifiers was overriding
+  the `@constant` match on SCREAMING_CASE names.
+- 2026-10-06: menus (`Pmenu`, blink.cmp menu) sit on `303030` so they have an
+  edge without a border; every other float keeps the editor background with
+  a `5f5f5f` border (phase 3 bullet).
+- 2026-10-06: rainbow set for blink.pairs, indent guides and markdown
+  headings is `field, type, constant, keyword, green` (warm only); the
+  IntelliJ ANGLE_BRACKETS set with pink and cyan stays in the palette unused.
+- 2026-10-06: no compiled highlight cache. Load measured at ~0.5 ms for the
+  owner's plugin set and ~1 ms with every file applied.
+- 2026-10-06: the owner's dotfiles re-apply `BlinkPairsWarm1..3` gruvbox
+  hexes, `IndentLine*` hexes and relink `BlinkIndent*` to `Ibl*` on every
+  ColorScheme; the theme defines `Ibl*` in base so the relink lands on theme
+  colors, the hexes are the config's business.
+- Open: `DiagnosticUnderlineError` keeps IntelliJ's `e81a1a`, the only
+  saturated primary in the theme. One role (`diag.sp_error`); `bc8383` is
+  the candidate if it proves too loud.
