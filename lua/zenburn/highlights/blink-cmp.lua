@@ -14,13 +14,13 @@ return function(c, opts)
     BlinkCmpSource = { fg = ui.fg_faint },
     BlinkCmpGhostText = { fg = ui.fg_faint },
     BlinkCmpKind = { fg = ui.fg_dim },
-    BlinkCmpDoc = "NormalFloat",
-    BlinkCmpDocBorder = "FloatBorder",
-    BlinkCmpDocSeparator = "FloatBorder",
+    BlinkCmpDoc = { fg = ui.fg, bg = ui.bg_pmenu }, -- part of the popup, usually borderless
+    BlinkCmpDocBorder = { fg = ui.fg_border, bg = ui.bg_pmenu },
+    BlinkCmpDocSeparator = { fg = ui.fg_border, bg = ui.bg_pmenu },
     -- bg_cursorline equals bg_float, so a CursorLine link is invisible here
     BlinkCmpDocCursorLine = { bg = ui.bg_visual },
-    BlinkCmpSignatureHelp = "NormalFloat",
-    BlinkCmpSignatureHelpBorder = "FloatBorder",
+    BlinkCmpSignatureHelp = { fg = ui.fg, bg = ui.bg_pmenu },
+    BlinkCmpSignatureHelpBorder = { fg = ui.fg_border, bg = ui.bg_pmenu },
     BlinkCmpSignatureHelpActiveParameter = "LspSignatureActiveParameter",
   }
   return require("zenburn.highlights.kinds").apply(groups, "BlinkCmpKind%s")
