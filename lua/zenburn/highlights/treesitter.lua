@@ -10,7 +10,7 @@ return function(c, opts)
     ["@variable.builtin"]           = "Keyword",   -- this, self, super
     ["@variable.parameter"]         = { fg = syn.fg },
     ["@variable.parameter.builtin"] = { fg = syn.fg },
-    ["@variable.member"]            = { fg = syn.field, bold = true },
+    ["@variable.member"]            = { fg = syn.field },
 
     ["@constant"]                   = "Constant",
     ["@constant.builtin"]           = "Keyword",   -- nil, null, undefined
@@ -41,7 +41,7 @@ return function(c, opts)
     ["@type.qualifier"]             = "Keyword",
     ["@attribute"]                  = { fg = syn.attribute },
     ["@attribute.builtin"]          = { fg = syn.attribute },
-    ["@property"]                   = { fg = syn.field, bold = true },
+    ["@property"]                   = { fg = syn.field },
     ["@property.json"]              = { fg = syn.fg, bold = true },   -- JSON.PROPERTY_KEY
     ["@property.jsonc"]             = { fg = syn.fg, bold = true },
     ["@property.yaml"]              = { fg = syn.fg, bold = true },

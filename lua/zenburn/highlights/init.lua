@@ -6,6 +6,8 @@ local M = {}
 -- applied (base, treesitter, semantic, kinds).
 -- stylua: ignore
 M.plugins = {
+  ["blink.indent"] = "blink-indent",
+  ["blink.pairs"] = "blink-pairs",
   ["gitsigns.nvim"] = "gitsigns",
   ["leap.nvim"] = "leap",
   ["neotest"] = "neotest",

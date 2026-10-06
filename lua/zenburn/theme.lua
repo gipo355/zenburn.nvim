@@ -77,7 +77,7 @@ function M.setup(opts)
       interface = p.interface,
       static_fn = p.static_fn,
       constant = p.constant,
-      field = p.field,
+      field = p.fg, -- IJ renders fields as plain text (SPEC 5, screenshot)
       attribute = p.type,
       tag = p.tag,
       tag_attr = p.field,
@@ -122,7 +122,8 @@ function M.setup(opts)
       text = p.change,
     },
 
-    rainbow = p.rainbow,
+    -- warm hues only (SPEC phase 2); p.rainbow keeps the IJ set for reference
+    rainbow = { p.field, p.type, p.constant, p.keyword, p.green },
 
     terminal = {
       black = p.bg,

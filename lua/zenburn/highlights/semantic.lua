@@ -28,8 +28,8 @@ return function(c, opts)
     ["@lsp.type.method"]         = "Function",
     ["@lsp.type.member"]         = "Function",           -- tsserver
     ["@lsp.type.macro"]          = "Function",
-    ["@lsp.type.property"]       = { fg = syn.field, bold = true },
-    ["@lsp.type.recordComponent"] = { fg = syn.field, bold = true },
+    ["@lsp.type.property"]       = { fg = syn.field },
+    ["@lsp.type.recordComponent"] = { fg = syn.field },
     ["@lsp.type.variable"]       = {},                   -- treesitter decides
     ["@lsp.type.parameter"]      = {},
     ["@lsp.type.keyword"]        = "Keyword",
